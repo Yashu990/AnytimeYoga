@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../layouts/Header'
 
-import HealthBenefits from '../components/whyyoga/HealthBenefits'
+
 import ComparisonSection from '../components/whyyoga/ComparisonSection'
+import FitnessWellnessSection from '../components/home/FitnessWellnessSection'
 import Button from '../components/ui/Button'
 import { ArrowRight } from 'lucide-react'
 
@@ -38,8 +40,10 @@ const WhyYoga = () => {
                 </div>
             </section>
 
-            {/* Health Benefits Section */}
-            <HealthBenefits />
+
+
+            {/* Complete Harmony Section */}
+            <FitnessWellnessSection />
 
             {/* Daily Wellness / Quote Section */}
             <section className="py-20 bg-yoga-sage-900 text-white text-center">
@@ -59,12 +63,14 @@ const WhyYoga = () => {
                 <div className="container-custom max-w-3xl">
                     <h2 className="text-4xl font-bold text-gray-900 mb-6">Ready to find your balance?</h2>
                     <p className="text-xl text-gray-600 mb-10">Join thousands of others who have made the choice for a healthier, happier life.</p>
-                    <Button size="large" className="shadow-xl shadow-yoga-sage-200">
-                        <span className="flex items-center space-x-2">
-                            <span>Start Your Free Trial</span>
-                            <ArrowRight size={20} />
-                        </span>
-                    </Button>
+                    <Link to="/free-trial">
+                        <Button size="large" className="shadow-xl shadow-yoga-sage-200">
+                            <span className="flex items-center space-x-2">
+                                <span>Start Your Free Trial</span>
+                                <ArrowRight size={20} />
+                            </span>
+                        </Button>
+                    </Link>
                 </div>
             </section>
 

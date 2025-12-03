@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Button from '../ui/Button'
 import { ArrowRight, Play, Star } from 'lucide-react'
 
@@ -44,19 +45,23 @@ const HeroSection = () => {
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-                        <Button size="large" className="w-full sm:w-auto shadow-xl shadow-yoga-sage-900/50 hover:shadow-2xl hover:shadow-yoga-sage-800/50 transition-all duration-500 border border-white/10">
-                            <span className="flex items-center space-x-2">
-                                <span>Start Free Trial</span>
-                                <ArrowRight size={20} />
-                            </span>
-                        </Button>
+                        <Link to="/free-trial">
+                            <Button size="large" className="w-full sm:w-auto shadow-xl shadow-yoga-sage-900/50 hover:shadow-2xl hover:shadow-yoga-sage-800/50 transition-all duration-500 border border-white/10">
+                                <span className="flex items-center space-x-2">
+                                    <span>Start Free Trial</span>
+                                    <ArrowRight size={20} />
+                                </span>
+                            </Button>
+                        </Link>
 
-                        <button className="flex items-center space-x-4 group w-full sm:w-auto justify-center sm:justify-start">
-                            <div className="w-14 h-14 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center shadow-lg text-white group-hover:scale-110 transition-transform duration-300 group-hover:bg-white/20">
-                                <Play size={20} fill="currentColor" className="ml-1" />
-                            </div>
-                            <span className="text-white font-semibold text-lg group-hover:text-yoga-sage-200 transition-colors">Watch Demo</span>
-                        </button>
+                        <Link to="/watch-demo" className="w-full sm:w-auto">
+                            <button className="flex items-center space-x-4 group w-full justify-center sm:justify-start">
+                                <div className="w-14 h-14 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center shadow-lg text-white group-hover:scale-110 transition-transform duration-300 group-hover:bg-white/20">
+                                    <Play size={20} fill="currentColor" className="ml-1" />
+                                </div>
+                                <span className="text-white font-semibold text-lg group-hover:text-yoga-sage-200 transition-colors">Watch Demo</span>
+                            </button>
+                        </Link>
                     </div>
 
                     {/* Stats / Social Proof */}

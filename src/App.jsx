@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Header from './layouts/Header'
 import Footer from './layouts/Footer'
 import Home from './pages/Home'
@@ -13,6 +13,9 @@ import ScheduleSlot from './pages/ScheduleSlot'
 import Payment from './pages/Payment'
 import Invoice from './pages/Invoice'
 import YogaDetail from './pages/YogaDetail'
+import BenefitDetail from './pages/BenefitDetail'
+import FreeTrial from './pages/FreeTrial'
+import WatchDemo from './pages/WatchDemo'
 import Feedback from './pages/Feedback'
 import TeacherDashboard from './pages/teacher/TeacherDashboard'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -23,37 +26,51 @@ import PaymentHistory from './pages/admin/PaymentHistory'
 import FeedbackManagement from './pages/admin/FeedbackManagement'
 import ComponentDemo from './pages/ComponentDemo'
 
+function AppContent() {
+    const location = useLocation()
+
+    // Hide header and footer for admin and teacher routes
+    const hideLayout = location.pathname.startsWith('/admin') || location.pathname.startsWith('/teacher')
+
+    return (
+        <div className="flex flex-col min-h-screen">
+            {!hideLayout && <Header />}
+            <main className="flex-grow">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/why-yoga" element={<WhyYoga />} />
+                    <Route path="/benefits" element={<FitnessBenefits />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/schedule" element={<ScheduleSlot />} />
+                    <Route path="/practice/:id" element={<YogaDetail />} />
+                    <Route path="/benefit/:id" element={<BenefitDetail />} />
+                    <Route path="/free-trial" element={<FreeTrial />} />
+                    <Route path="/watch-demo" element={<WatchDemo />} />
+                    <Route path="/payment/:bookingId" element={<Payment />} />
+                    <Route path="/invoice/:invoiceId" element={<Invoice />} />
+                    <Route path="/feedback" element={<Feedback />} />
+                    <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
+                    <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                    <Route path="/admin/users" element={<UserManagement />} />
+                    <Route path="/admin/teachers" element={<TeacherManagement />} />
+                    <Route path="/admin/schedules" element={<AllSchedules />} />
+                    <Route path="/admin/payments" element={<PaymentHistory />} />
+                    <Route path="/admin/feedback" element={<FeedbackManagement />} />
+                    <Route path="/components" element={<ComponentDemo />} />
+                </Routes>
+            </main>
+            {!hideLayout && <Footer />}
+        </div>
+    )
+}
+
 function App() {
     return (
         <Router>
-            <div className="flex flex-col min-h-screen">
-                <Header />
-                <main className="flex-grow">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/why-yoga" element={<WhyYoga />} />
-                        <Route path="/benefits" element={<FitnessBenefits />} />
-                        <Route path="/about" element={<AboutUs />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/dashboard" element={<Dashboard />} />
-                        <Route path="/schedule" element={<ScheduleSlot />} />
-                        <Route path="/practice/:id" element={<YogaDetail />} />
-                        <Route path="/payment/:bookingId" element={<Payment />} />
-                        <Route path="/invoice/:invoiceId" element={<Invoice />} />
-                        <Route path="/feedback" element={<Feedback />} />
-                        <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
-                        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                        <Route path="/admin/users" element={<UserManagement />} />
-                        <Route path="/admin/teachers" element={<TeacherManagement />} />
-                        <Route path="/admin/schedules" element={<AllSchedules />} />
-                        <Route path="/admin/payments" element={<PaymentHistory />} />
-                        <Route path="/admin/feedback" element={<FeedbackManagement />} />
-                        <Route path="/components" element={<ComponentDemo />} />
-                    </Routes>
-                </main>
-                <Footer />
-            </div>
+            <AppContent />
         </Router>
     )
 }

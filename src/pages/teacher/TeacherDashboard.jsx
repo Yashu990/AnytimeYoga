@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LogOut, Bell, CheckCircle } from 'lucide-react'
+import { LogOut, Bell, CheckCircle, DollarSign, TrendingUp, Calendar, Award, Clock, Users, BarChart3 } from 'lucide-react'
 import Header from '../../layouts/Header'
 import PendingRequests from '../../components/teacher/PendingRequests'
 import ApprovedSessions from '../../components/teacher/ApprovedSessions'
@@ -12,18 +12,44 @@ const TeacherDashboard = () => {
     const [sessions, setSessions] = useState([])
     const [showSuccess, setShowSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
+    const [timeRange, setTimeRange] = useState('monthly')
+
+    // Teacher profile data
+    const teacherProfile = {
+        name: 'Priya Sharma',
+        email: 'priya.sharma@anytimeyoga.com',
+        phone: '+91 98765 43210',
+        specialization: 'Vinyasa & Power Yoga',
+        experience: '8 years',
+        rating: 4.9,
+        totalSessions: 245,
+        image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop'
+    }
+
+    // Earnings data
+    const earningsData = {
+        totalEarnings: 45000,
+        thisMonth: 8500,
+        lastPayout: 6200,
+        monthlyData: [
+            { month: 'Jul', amount: 5200 },
+            { month: 'Aug', amount: 6800 },
+            { month: 'Sep', amount: 7200 },
+            { month: 'Oct', amount: 6500 },
+            { month: 'Nov', amount: 7800 },
+            { month: 'Dec', amount: 8500 }
+        ]
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0)
 
-        // Check if teacher is logged in
         const isAuthenticated = localStorage.getItem('teacherAuth')
         if (!isAuthenticated) {
-            navigate('/teacher/login')
+            navigate('/')
             return
         }
 
-        // Mock data - in real app, fetch from API
         setSessions([
             {
                 id: 'BK001',
@@ -71,7 +97,7 @@ const TeacherDashboard = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('teacherAuth')
-        navigate('/teacher/login')
+        navigate('/')
     }
 
     const handleApprove = (id) => {
@@ -109,102 +135,429 @@ const TeacherDashboard = () => {
         { id: 'completed', label: 'Completed', count: completedSessions.length, color: 'gray' }
     ]
 
+    const completionRate = 85 // Mock data
+
     return (
         <div className="min-h-screen bg-gray-50">
             <Header />
 
-            {/* Dashboard Header */}
-            <section className="bg-gradient-to-br from-yoga-sage-100 via-white to-yoga-lavender-50 py-8 pt-24 border-b border-gray-200">
-                <div className="container-custom">
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-2">
-                                Teacher Dashboard
-                            </h1>
-                            <p className="text-gray-600">Manage your yoga sessions and bookings</p>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <button className="p-2 hover:bg-white rounded-lg transition-colors relative">
-                                <Bell size={24} className="text-gray-600" />
-                                {pendingRequests.length > 0 && (
-                                    <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                                )}
-                            </button>
-                            <button
-                                onClick={handleLogout}
-                                className="flex items-center space-x-2 px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-                            >
-                                <LogOut size={18} />
-                                <span className="hidden md:inline">Logout</span>
-                            </button>
+            <div className="pt-20">
+                {/* Top Stats Cards */}
+                <section className="bg-white py-6 border-b border-gray-200">
+                    <div className="container-custom">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            {/* Pending Card - Purple */}
+                            <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-purple-100 text-sm mb-1">Pending Requests</p>
+                                        <p className="text-3xl font-bold">{pendingRequests.length}+</p>
+                                    </div>
+                                    <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                                        <Clock size={28} />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Approved Card - Blue */}
+                            <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-blue-100 text-sm mb-1">Approved Sessions</p>
+                                        <p className="text-3xl font-bold">{approvedSessions.length}+</p>
+                                    </div>
+                                    <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                                        <CheckCircle size={28} />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Completed Card - Red/Pink */}
+                            <div className="bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-pink-100 text-sm mb-1">Completed Sessions</p>
+                                        <p className="text-3xl font-bold">{teacherProfile.totalSessions}+</p>
+                                    </div>
+                                    <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                                        <Users size={28} />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Earnings Card - Orange */}
+                            <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-orange-100 text-sm mb-1">This Month Earnings</p>
+                                        <p className="text-3xl font-bold">₹{(earningsData.thisMonth / 1000).toFixed(1)}k</p>
+                                    </div>
+                                    <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                                        <DollarSign size={28} />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </section>
 
-                    {/* Stats */}
-                    <div className="grid grid-cols-3 gap-4 mt-6">
-                        <div className="bg-white rounded-xl p-4 border border-gray-200">
-                            <p className="text-gray-500 text-sm mb-1">Pending</p>
-                            <p className="text-2xl font-bold text-orange-600">{pendingRequests.length}</p>
+                {/* Main Dashboard Content */}
+                <section className="py-8">
+                    <div className="container-custom">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            {/* Left: Earnings Overview - Takes 2 columns */}
+                            <div className="lg:col-span-2 space-y-6">
+                                {/* Earnings Chart */}
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                                    <div className="flex items-center justify-between mb-6">
+                                        <div>
+                                            <h2 className="text-xl font-bold text-gray-900">Dashboard</h2>
+                                            <p className="text-sm text-gray-500">Overview of latest month</p>
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                            {['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'].map((range) => (
+                                                <button
+                                                    key={range}
+                                                    onClick={() => setTimeRange(range.toLowerCase())}
+                                                    className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${timeRange === range.toLowerCase()
+                                                        ? 'bg-green-500 text-white'
+                                                        : 'text-gray-600 hover:bg-gray-100'
+                                                        }`}
+                                                >
+                                                    {range}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Stats */}
+                                    <div className="grid grid-cols-2 gap-4 mb-6">
+                                        <div>
+                                            <p className="text-3xl font-bold text-gray-900">₹{earningsData.thisMonth.toLocaleString()}</p>
+                                            <p className="text-sm text-gray-500">Current Month Earnings</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-3xl font-bold text-gray-900">{completedSessions.length + approvedSessions.length}</p>
+                                            <p className="text-sm text-gray-500">Current Month Sessions</p>
+                                        </div>
+                                    </div>
+
+                                    <button className="mb-6 px-6 py-2.5 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-colors">
+                                        Last Month Summary
+                                    </button>
+
+                                    {/* Line Chart Area */}
+                                    <div className="relative h-64 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4">
+                                        <svg className="w-full h-full" viewBox="0 0 600 200" preserveAspectRatio="none">
+                                            {/* Grid lines */}
+                                            {[0, 50, 100, 150, 200].map((y) => (
+                                                <line
+                                                    key={y}
+                                                    x1="0"
+                                                    y1={y}
+                                                    x2="600"
+                                                    y2={y}
+                                                    stroke="#e5e7eb"
+                                                    strokeWidth="1"
+                                                />
+                                            ))}
+
+                                            {/* Area fills */}
+                                            <defs>
+                                                <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style={{ stopColor: '#ec4899', stopOpacity: 0.3 }} />
+                                                    <stop offset="100%" style={{ stopColor: '#ec4899', stopOpacity: 0 }} />
+                                                </linearGradient>
+                                                <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style={{ stopColor: '#f97316', stopOpacity: 0.3 }} />
+                                                    <stop offset="100%" style={{ stopColor: '#f97316', stopOpacity: 0 }} />
+                                                </linearGradient>
+                                                <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style={{ stopColor: '#8b5cf6', stopOpacity: 0.3 }} />
+                                                    <stop offset="100%" style={{ stopColor: '#8b5cf6', stopOpacity: 0 }} />
+                                                </linearGradient>
+                                            </defs>
+
+                                            {/* Line 1 - Pink */}
+                                            <path
+                                                d="M 0,120 Q 100,80 200,100 T 400,90 T 600,70"
+                                                fill="url(#grad1)"
+                                                opacity="0.5"
+                                            />
+                                            <path
+                                                d="M 0,120 Q 100,80 200,100 T 400,90 T 600,70"
+                                                fill="none"
+                                                stroke="#ec4899"
+                                                strokeWidth="3"
+                                            />
+
+                                            {/* Line 2 - Orange */}
+                                            <path
+                                                d="M 0,140 Q 100,110 200,120 T 400,110 T 600,90"
+                                                fill="url(#grad2)"
+                                                opacity="0.5"
+                                            />
+                                            <path
+                                                d="M 0,140 Q 100,110 200,120 T 400,110 T 600,90"
+                                                fill="none"
+                                                stroke="#f97316"
+                                                strokeWidth="3"
+                                            />
+
+                                            {/* Line 3 - Purple */}
+                                            <path
+                                                d="M 0,160 Q 100,130 200,140 T 400,125 T 600,105"
+                                                fill="url(#grad3)"
+                                                opacity="0.5"
+                                            />
+                                            <path
+                                                d="M 0,160 Q 100,130 200,140 T 400,125 T 600,105"
+                                                fill="none"
+                                                stroke="#8b5cf6"
+                                                strokeWidth="3"
+                                            />
+                                        </svg>
+
+                                        {/* Month labels */}
+                                        <div className="flex justify-between mt-2 text-xs text-gray-500 font-medium">
+                                            {['Jan', 'Feb', 'Mar', 'Apr', 'May'].map((month) => (
+                                                <span key={month}>{month}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Bottom Stats */}
+                                    <div className="grid grid-cols-4 gap-4 mt-6">
+                                        <div className="flex items-center space-x-3">
+                                            <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                                                <DollarSign size={20} className="text-pink-600" />
+                                            </div>
+                                            <div>
+                                                <p className="text-xs text-gray-500">Wallet Balance</p>
+                                                <p className="text-sm font-bold text-gray-900">₹3,567</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                                <Award size={20} className="text-purple-600" />
+                                            </div>
+                                            <div>
+                                                <p className="text-xs text-gray-500">Referral Earning</p>
+                                                <p className="text-sm font-bold text-gray-900">₹1,589</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <BarChart3 size={20} className="text-blue-600" />
+                                            </div>
+                                            <div>
+                                                <p className="text-xs text-gray-500">Estimate sales</p>
+                                                <p className="text-sm font-bold text-gray-900">₹2,651</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center">
+                                                <TrendingUp size={20} className="text-cyan-600" />
+                                            </div>
+                                            <div>
+                                                <p className="text-xs text-gray-500">Earning</p>
+                                                <p className="text-sm font-bold text-gray-900">₹53,567</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Recent Activities */}
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                                    <h3 className="text-lg font-bold text-gray-900 mb-4">Recent Activities</h3>
+                                    <div className="space-y-4">
+                                        {[
+                                            { time: '40 Mins Ago', icon: 'bg-pink-100 text-pink-600', title: 'Session Completed', desc: 'Emily completed Vinyasa session' },
+                                            { time: '1 day ago', icon: 'bg-purple-100 text-purple-600', title: 'New Booking', desc: 'Michael booked Hatha session' },
+                                            { time: '40 Mins Ago', icon: 'bg-cyan-100 text-cyan-600', title: 'Payout Received', desc: 'Amount ₹6,200 credited' }
+                                        ].map((activity, idx) => (
+                                            <div key={idx} className="flex items-center space-x-4">
+                                                <div className="text-sm text-gray-500 w-24">{activity.time}</div>
+                                                <div className={`w-10 h-10 ${activity.icon} rounded-full flex items-center justify-center flex-shrink-0`}>
+                                                    <CheckCircle size={18} />
+                                                </div>
+                                                <div>
+                                                    <p className="font-semibold text-gray-900">{activity.title}</p>
+                                                    <p className="text-sm text-gray-500">{activity.desc}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Right: Analytics */}
+                            <div className="lg:col-span-1">
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 sticky top-24">
+                                    <div className="flex items-center justify-between mb-6">
+                                        <h3 className="text-lg font-bold text-gray-900">Analytics</h3>
+                                        <button className="text-gray-400 hover:text-gray-600">
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    {/* Donut Chart */}
+                                    <div className="flex items-center justify-center mb-6">
+                                        <div className="relative w-48 h-48">
+                                            <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                                                {/* Background circle */}
+                                                <circle
+                                                    cx="50"
+                                                    cy="50"
+                                                    r="40"
+                                                    fill="none"
+                                                    stroke="#f3f4f6"
+                                                    strokeWidth="12"
+                                                />
+                                                {/* Progress segments */}
+                                                <circle
+                                                    cx="50"
+                                                    cy="50"
+                                                    r="40"
+                                                    fill="none"
+                                                    stroke="#8b5cf6"
+                                                    strokeWidth="12"
+                                                    strokeDasharray={`${completionRate * 2.51} ${251 - completionRate * 2.51}`}
+                                                    strokeLinecap="round"
+                                                />
+                                                <circle
+                                                    cx="50"
+                                                    cy="50"
+                                                    r="40"
+                                                    fill="none"
+                                                    stroke="#ef4444"
+                                                    strokeWidth="12"
+                                                    strokeDasharray="20 231"
+                                                    strokeDashoffset={-completionRate * 2.51}
+                                                    strokeLinecap="round"
+                                                />
+                                                <circle
+                                                    cx="50"
+                                                    cy="50"
+                                                    r="40"
+                                                    fill="none"
+                                                    stroke="#eab308"
+                                                    strokeWidth="12"
+                                                    strokeDasharray="15 236"
+                                                    strokeDashoffset={-(completionRate * 2.51 + 20)}
+                                                    strokeLinecap="round"
+                                                />
+                                            </svg>
+                                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                                <p className="text-4xl font-bold text-gray-900">{completionRate}%</p>
+                                                <p className="text-sm text-gray-500">Completion</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Legend */}
+                                    <div className="space-y-3">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center space-x-2">
+                                                <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
+                                                <span className="text-sm text-gray-700">Completed</span>
+                                            </div>
+                                            <span className="text-sm font-semibold text-gray-900">85%</span>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center space-x-2">
+                                                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                                                <span className="text-sm text-gray-700">Cancelled</span>
+                                            </div>
+                                            <span className="text-sm font-semibold text-gray-900">8%</span>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center space-x-2">
+                                                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                                <span className="text-sm text-gray-700">Rescheduled</span>
+                                            </div>
+                                            <span className="text-sm font-semibold text-gray-900">7%</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Teacher Profile Mini */}
+                                    <div className="mt-6 pt-6 border-t border-gray-200">
+                                        <div className="flex items-center space-x-3 mb-4">
+                                            <img
+                                                src={teacherProfile.image}
+                                                alt={teacherProfile.name}
+                                                className="w-12 h-12 rounded-full object-cover border-2 border-yoga-sage-200"
+                                            />
+                                            <div>
+                                                <p className="font-semibold text-gray-900">{teacherProfile.name}</p>
+                                                <p className="text-xs text-gray-500">{teacherProfile.specialization}</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors text-gray-700 font-medium"
+                                        >
+                                            <LogOut size={18} />
+                                            <span>Logout</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="bg-white rounded-xl p-4 border border-gray-200">
-                            <p className="text-gray-500 text-sm mb-1">Approved</p>
-                            <p className="text-2xl font-bold text-green-600">{approvedSessions.length}</p>
-                        </div>
-                        <div className="bg-white rounded-xl p-4 border border-gray-200">
-                            <p className="text-gray-500 text-sm mb-1">Completed</p>
-                            <p className="text-2xl font-bold text-gray-600">{completedSessions.length}</p>
+
+                        {/* Session Management Table */}
+                        <div className="mt-6 bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4">Session Management</h3>
+
+                            {/* Tabs */}
+                            <div className="flex space-x-2 mb-6 overflow-x-auto">
+                                {tabs.map((tab) => (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setActiveTab(tab.id)}
+                                        className={`px-6 py-2.5 rounded-xl font-medium transition-colors whitespace-nowrap flex items-center space-x-2 ${activeTab === tab.id
+                                            ? 'bg-purple-600 text-white'
+                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                            }`}
+                                    >
+                                        <span>{tab.label}</span>
+                                        {tab.count > 0 && (
+                                            <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${activeTab === tab.id
+                                                ? 'bg-white text-purple-600'
+                                                : `bg-${tab.color}-100 text-${tab.color}-600`
+                                                }`}>
+                                                {tab.count}
+                                            </span>
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Tab Content */}
+                            {activeTab === 'pending' && (
+                                <PendingRequests
+                                    requests={pendingRequests}
+                                    onApprove={handleApprove}
+                                    onReject={handleReject}
+                                />
+                            )}
+
+                            {activeTab === 'approved' && (
+                                <ApprovedSessions
+                                    sessions={approvedSessions}
+                                    onMarkCompleted={handleMarkCompleted}
+                                />
+                            )}
+
+                            {activeTab === 'completed' && (
+                                <CompletedSessions sessions={completedSessions} />
+                            )}
                         </div>
                     </div>
-                </div>
-            </section>
-
-            {/* Tabs */}
-            <section className="py-8">
-                <div className="container-custom">
-                    <div className="flex space-x-2 mb-6 overflow-x-auto">
-                        {tabs.map((tab) => (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`px-6 py-3 rounded-lg font-medium transition-colors whitespace-nowrap flex items-center space-x-2 ${activeTab === tab.id
-                                        ? 'bg-yoga-sage-600 text-white'
-                                        : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
-                                    }`}
-                            >
-                                <span>{tab.label}</span>
-                                {tab.count > 0 && (
-                                    <span className={`px-2 py-1 rounded-full text-xs font-bold ${activeTab === tab.id
-                                            ? 'bg-white text-yoga-sage-600'
-                                            : `bg-${tab.color}-100 text-${tab.color}-600`
-                                        }`}>
-                                        {tab.count}
-                                    </span>
-                                )}
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* Tab Content */}
-                    {activeTab === 'pending' && (
-                        <PendingRequests
-                            requests={pendingRequests}
-                            onApprove={handleApprove}
-                            onReject={handleReject}
-                        />
-                    )}
-
-                    {activeTab === 'approved' && (
-                        <ApprovedSessions
-                            sessions={approvedSessions}
-                            onMarkCompleted={handleMarkCompleted}
-                        />
-                    )}
-
-                    {activeTab === 'completed' && (
-                        <CompletedSessions sessions={completedSessions} />
-                    )}
-                </div>
-            </section>
+                </section>
+            </div>
 
             {/* Success Toast */}
             {showSuccess && (

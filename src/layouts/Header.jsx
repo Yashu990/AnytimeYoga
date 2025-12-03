@@ -136,8 +136,8 @@ const Header = () => {
                                 <button
                                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                                     className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${isScrolled || !isDarkHeroPage
-                                            ? 'hover:bg-gray-100'
-                                            : 'hover:bg-white/10 text-white'
+                                        ? 'hover:bg-gray-100'
+                                        : 'hover:bg-white/10 text-white'
                                         }`}
                                 >
                                     <div className="w-8 h-8 bg-gradient-to-br from-yoga-sage-400 to-yoga-lavender-400 rounded-full flex items-center justify-center text-white font-bold shadow-sm">

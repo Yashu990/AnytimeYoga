@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import HeroSection from '../components/home/HeroSection'
 import BenefitsSection from '../components/home/BenefitsSection'
 import WhyYogaSection from '../components/home/WhyYogaSection'
@@ -55,9 +56,11 @@ const Home = () => {
                     </div>
 
                     <div className="md:w-1/3 text-center md:text-right">
-                        <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-4 px-10 rounded-full shadow-2xl hover:shadow-purple-500/50 hover:scale-105 transform transition-all duration-300 text-lg border border-white/20">
-                            Start Your Journey
-                        </button>
+                        <Link to="/free-trial">
+                            <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-4 px-10 rounded-full shadow-2xl hover:shadow-purple-500/50 hover:scale-105 transform transition-all duration-300 text-lg border border-white/20">
+                                Start Your Journey
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </section>
