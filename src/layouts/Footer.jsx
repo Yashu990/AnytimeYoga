@@ -11,9 +11,11 @@ const Footer = () => {
                     {/* About */}
                     <div>
                         <div className="flex items-center space-x-2 mb-4">
-                            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                                <span className="text-2xl">🧘</span>
-                            </div>
+                            <img
+                                src="/logo.jpg"
+                                alt="AnyTime Yoga Logo"
+                                className="w-10 h-10 rounded-full object-cover"
+                            />
                             <h3 className="text-xl font-bold font-display">Anytime Yoga</h3>
                         </div>
                         <p className="text-white/80 text-sm leading-relaxed mb-4">
@@ -41,8 +43,8 @@ const Footer = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="#testimonials" className="text-white/80 hover:text-white transition-colors text-sm">
-                                    Testimonials
+                                <a href="/health-counselor" className="text-white/80 hover:text-white transition-colors text-sm">
+                                    Health Counselor
                                 </a>
                             </li>
                         </ul>

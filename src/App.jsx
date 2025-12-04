@@ -25,6 +25,7 @@ import AllSchedules from './pages/admin/AllSchedules'
 import PaymentHistory from './pages/admin/PaymentHistory'
 import FeedbackManagement from './pages/admin/FeedbackManagement'
 import ComponentDemo from './pages/ComponentDemo'
+import HealthCounselor from './pages/HealthCounselor'
 
 function AppContent() {
     const location = useLocation()
@@ -41,6 +42,7 @@ function AppContent() {
                     <Route path="/why-yoga" element={<WhyYoga />} />
                     <Route path="/benefits" element={<FitnessBenefits />} />
                     <Route path="/about" element={<AboutUs />} />
+                    <Route path="/health-counselor" element={<HealthCounselor />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/dashboard" element={<Dashboard />} />

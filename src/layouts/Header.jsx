@@ -83,10 +83,12 @@ const Header = () => {
             <div className="container-custom">
                 <div className="flex items-center justify-between px-6">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center space-x-2 group">
-                        <div className="w-10 h-10 bg-gradient-to-br from-yoga-sage-400 to-yoga-lavender-400 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300">
-                            <span className="text-white font-bold text-xl">🧘</span>
-                        </div>
+                    <Link to="/" className="flex items-center space-x-3 group">
+                        <img
+                            src="/logo.jpg"
+                            alt="AnyTime Yoga Logo"
+                            className="w-12 h-12 rounded-full shadow-md group-hover:scale-110 transition-transform duration-300 object-cover"
+                        />
                         <div>
                             <h1 className={`text-2xl font-bold font-display transition-colors duration-300 ${logoTextClass}`}>
                                 Anytime Yoga
@@ -123,12 +125,12 @@ const Header = () => {
                         >
                             About
                         </Link>
-                        <button
-                            onClick={() => scrollToSection('testimonials')}
+                        <Link
+                            to="/health-counselor"
                             className={`transition-colors font-medium ${textColorClass}`}
                         >
-                            Testimonials
-                        </button>
+                            Health Counselor
+                        </Link>
 
                         {/* Auth Section */}
                         {authState.isLoggedIn ? (
@@ -223,12 +225,13 @@ const Header = () => {
                             >
                                 About
                             </Link>
-                            <button
-                                onClick={() => scrollToSection('testimonials')}
+                            <Link
+                                to="/health-counselor"
                                 className="text-gray-700 hover:text-yoga-sage-600 transition-colors font-medium text-left"
+                                onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                Testimonials
-                            </button>
+                                Health Counselor
+                            </Link>
 
                             {/* Mobile Auth Section */}
                             {authState.isLoggedIn ? (
