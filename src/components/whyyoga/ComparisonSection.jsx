@@ -7,11 +7,11 @@ const ComparisonSection = () => {
             {/* Spiritual Background Image */}
             <div className="absolute inset-0 z-0">
                 <img
-                    src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=2031&auto=format&fit=crop"
-                    alt="Spiritual Yoga Background"
-                    className="w-full h-full object-cover opacity-60"
+                    src="/chakra-meditation.jpg"
+                    alt="Chakra Energy Centers Meditation"
+                    className="w-full h-full object-cover opacity-70"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50"></div>
             </div>
 
             <div className="container-custom relative z-10">

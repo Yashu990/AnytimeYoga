@@ -107,11 +107,11 @@ const BenefitsSection = () => {
                 <div className="mt-20 relative rounded-3xl overflow-hidden shadow-2xl animate-fade-in">
                     <div className="absolute inset-0">
                         <img
-                            src="/images/spiritual-yoga.png"
-                            alt="Spiritual Yoga Meditation"
+                            src="/way-of-life.jpg"
+                            alt="Spiritual Guru Meditation by Sacred Lake"
                             className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
                     </div>
 
                     <div className="relative z-10 p-8 md:p-16 max-w-2xl text-white">

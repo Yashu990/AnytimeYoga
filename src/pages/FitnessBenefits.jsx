@@ -20,8 +20,8 @@ const FitnessBenefits = () => {
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1536623975707-c4b3b2af565d?q=80&w=2070&auto=format&fit=crop"
-                        alt="Cosmic Meditation"
+                        src="/benefits-hero.jpg"
+                        alt="Cosmic Meditation Energy"
                         className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-purple-900/30 to-black/80 mix-blend-multiply"></div>
@@ -52,7 +52,7 @@ const FitnessBenefits = () => {
             </section>
 
             {/* Introduction */}
-            <section className="py-20 text-center bg-gradient-to-b from-black to-white text-white">
+            <section className="py-20 text-center bg-gradient-to-b from-[#0d0a0f] via-[#4a0f0f] to-white text-white">
                 <div className="container-custom max-w-3xl">
                     <h2 className="text-3xl font-display font-bold mb-6">Beyond the Physical</h2>
                     <p className="text-lg text-gray-300">
@@ -121,7 +121,7 @@ const FitnessBenefits = () => {
                     "Nervous System Regulation",
                     "Emotional Release"
                 ]}
-                image="https://images.unsplash.com/photo-1507120416855-02505693ee4b?q=80&w=2070&auto=format&fit=crop"
+                image="/kundalini-energy.jpg"
             />
 
             {/* Yoga Nidra */}
@@ -136,7 +136,7 @@ const FitnessBenefits = () => {
                     "Improved Sleep Quality",
                     "Subconscious Reprogramming"
                 ]}
-                image="https://images.unsplash.com/photo-1515023115689-589c33041697?q=80&w=2070&auto=format&fit=crop"
+                image="/yoga-nidra.jpg"
             />
 
             {/* Meditation & Breathwork */}
@@ -159,14 +159,14 @@ const FitnessBenefits = () => {
             <FAQSection />
 
             {/* Final CTA */}
-            <section className="py-24 bg-gray-900 text-white text-center relative overflow-hidden">
+            <section className="py-24 bg-gradient-to-br from-[#4a0f0f] via-[#d94b3d] to-[#0d0a0f] text-white text-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
                 <div className="container-custom max-w-4xl relative z-10">
                     <h2 className="text-4xl md:text-5xl font-display font-bold mb-8">Your Journey Begins Here</h2>
                     <p className="text-xl text-gray-300 mb-12">
                         Whether you seek physical strength or spiritual awakening, we have a path for you.
                     </p>
-                    <Button size="large" className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border-none">
+                    <Button size="large" className="bg-gradient-to-r from-[#ff6b35] to-[#ffb347] text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border-none hover:from-[#ffb347] hover:to-[#ff6b35]">
                         <span className="flex items-center space-x-2">
                             <span>Start Free Trial</span>
                             <ArrowRight size={20} />
