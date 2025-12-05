@@ -6,16 +6,27 @@ import { ArrowRight, Play, Star } from 'lucide-react'
 const HeroSection = () => {
     return (
         <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
-            {/* Full Background Image with Parallax-like feel */}
+            {/* Full Background Video */}
             <div className="absolute inset-0 z-0">
-                <img
-                    src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=2070&auto=format&fit=crop"
-                    alt="Serene Yoga Background"
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
                     className="w-full h-full object-cover object-center"
-                />
+                >
+                    <source src="/hero-banner-video.mp4" type="video/mp4" />
+                    {/* Fallback for browsers that don't support video */}
+                    <img
+                        src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=2070&auto=format&fit=crop"
+                        alt="Serene Yoga Background"
+                        className="w-full h-full object-cover object-center"
+                    />
+                </video>
                 {/* Dark Gradient Overlay for Text Readability */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/50 to-transparent"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
             </div>
 
             <div className="container-custom px-6 relative z-10 pt-20">
